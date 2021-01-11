@@ -1,0 +1,23 @@
+h3 {
+  margin-top: 50px;
+}
+
+form {
+  margin: 10px;
+}
+
+input,
+label {
+  width: 100%;
+  text-align: left;
+}
+
+.formContainer {
+  margin: auto;
+  max-width: 400px;
+  min-width: 290px;
+}
+
+.homeLink {
+  text-align: right;
+}
