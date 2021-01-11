@@ -16,17 +16,12 @@ button {
   margin: 10px;
 }
 
-form {
-  margin: 10px;
-}
-
-input,
-label {
-  width: 100%;
-  text-align: left;
+button:hover {
+  border: 1px solid #fff;
 }
 
 .homeContainer {
+  min-height: 100vh;
   width: 100%;
   background-color: #f2b706;
   color: #fff;

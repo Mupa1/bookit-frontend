@@ -1,22 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './HomePage.module.css';
-import SignUp from '../../components/SignUp/SignUp';
 
-const HomePage = () => {
-  const handleSignUpSubmit = e => {
-    e.preventDefault();
-    console.log('submitted');
-  };
-
-  return (
-    <div className={styles.homeContainer}>
-      <h1>BOOK AN APPOINTMENT</h1>
-      <button type="button">Register</button>
-      <button type="button">Login</button>
-      <SignUp handleSignUpSubmit={handleSignUpSubmit} />
-    </div>
-  );
-};
-
+const HomePage = () => (
+  <section className={styles.homeContainer}>
+    <h1>BOOK AN APPOINTMENT</h1>
+    <button type="button">
+      <Link to="/signin" className="text-white">Sign In</Link>
+    </button>
+    <button type="button">
+      <Link to="/signup" className="text-white">Register</Link>
+    </button>
+  </section>
+);
 export default HomePage;
