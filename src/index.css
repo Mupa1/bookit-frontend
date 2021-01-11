@@ -27,6 +27,10 @@ code {
     monospace;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 button {
   border: none;
 }
