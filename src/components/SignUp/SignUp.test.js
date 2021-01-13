@@ -1,24 +1,33 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { render } from '@testing-library/react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import SignUp from './SignUp';
+import store from '../../Redux/store';
 
 describe('SignUp', () => {
   it('renders SignUp component with a title', () => {
-    render(
-      <Router>
-        <SignUp />
-      </Router>,
+    const div = document.createElement('div');
+    const { queryAllByTestId } = render(
+      <Provider store={store}>
+        <Router>
+          <Route path="/signup" component={SignUp} />
+        </Router>
+      </Provider>, div,
     );
-    expect(screen.getByText('Register')).toBeInTheDocument();
+    const title = queryAllByTestId('title');
+    expect(title).toBeTruthy();
   });
 
   it('should have a registration form', () => {
+    const div = document.createElement('div');
     const { queryAllByTestId } = render(
-      <Router>
-        <SignUp />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <Route path="/signup" component={SignUp} />
+        </Router>
+      </Provider>, div,
     );
     const form = queryAllByTestId('form');
     expect(form).toBeTruthy();
