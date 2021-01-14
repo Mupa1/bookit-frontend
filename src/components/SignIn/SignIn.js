@@ -65,7 +65,7 @@ const SignIn = ({ user, fetchUser, history }) => {
           <div>
             Don&apos;t have an account.
             {' '}
-            <Link to="/SignIn">Register here.</Link>
+            <Link to="/signIn">Register here.</Link>
           </div>
         </form>
       </div>

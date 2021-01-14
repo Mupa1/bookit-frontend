@@ -51,6 +51,12 @@ const SignUp = ({ user, fetchUser, history }) => {
         <form data-testid="form" onSubmit={handleSubmit}>
           <h3 data-testid="title" className="text-center">Register</h3>
           <div className="form-group">
+            <label htmlFor="username">
+              Username
+              <input type="text" name="username" id="username" className="form-control" required onChange={handleChange} />
+            </label>
+          </div>
+          <div className="form-group">
             <label htmlFor="email">
               Email
               <input type="email" name="email" id="email" className="form-control" required onChange={handleChange} />
@@ -65,7 +71,7 @@ const SignUp = ({ user, fetchUser, history }) => {
           <div className="form-group">
             <label htmlFor="confirm-password">
               Confirm Password
-              <input type="confirm-password" name="confirm-password" id="confirm-password" className="form-control" required onChange={handleChange} />
+              <input type="password" name="confirm-password" id="confirm-password" className="form-control" required onChange={handleChange} />
             </label>
           </div>
           <button type="submit" className="p-0 m-0">Submit</button>
