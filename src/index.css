@@ -34,3 +34,7 @@ a:hover {
 button {
   border: none;
 }
+
+li {
+  list-style: none;
+}
