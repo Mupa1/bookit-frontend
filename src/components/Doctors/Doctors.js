@@ -1,38 +1,37 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { fetchDoctors } from '../../Redux/actions/index';
 import Doctor from '../Doctor/Doctor';
 
 const Doctors = ({ doctors, setDoctors }) => {
-  const getDoctors = set => {
-    fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors', {
+  useEffect(async () => {
+    const response = await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors', {
+      mode: 'cors',
       headers: {
         Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
       },
     }).then(res => res.json())
-      .then(res => set(res.data.doctor))
       .catch(error => (error));
-  };
-  useEffect(() => {
-    getDoctors(setDoctors);
+    setDoctors(response.data.doctor);
   }, [setDoctors]);
 
   return (
     doctors.length ? (
-      <div>
-        <ul>
-          {doctors.map(doctor => (
-            <li key={doctor.id}>
+      <ul>
+        {doctors.map(doctor => (
+          <Link to={`/doctors/${doctor.id}`} key={doctor.id}>
+            <li>
               <Doctor doctor={doctor} />
             </li>
-          ))}
-        </ul>
-      </div>
+          </Link>
+        ))}
+      </ul>
     ) : (
-      <div>No Doctors Found!</div>
+      <div className="text-center">Loading doctors...</div>
     )
   );
 };
