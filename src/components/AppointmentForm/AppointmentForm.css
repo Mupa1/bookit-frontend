@@ -15,7 +15,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 10px;
 }
 
 .display-block {
@@ -31,6 +30,11 @@
 }
 
 .close-btn button {
-  font-size: 30px;
-  width: 50px;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.appoint-title {
+  margin-top: 0;
 }

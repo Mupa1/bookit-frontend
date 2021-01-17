@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import Modal from '../AppointmentForm/AppointmentForm';
+import AppointmentForm from '../AppointmentForm/AppointmentForm';
+import { setAppointment } from '../../Redux/actions/index';
 
-const DoctorDetails = ({ match }) => {
+const DoctorDetails = ({
+  match, setAppointment, user, history,
+}) => {
   const [doctor, setDoctor] = useState(null);
   const [show, setShow] = useState(false);
+  const appointmentObj = {
+    appointments: {},
+  };
 
   useEffect(async () => {
     const id = match.params.doctor_id;
     const response = await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors/${id}`, {
       mode: 'cors',
       headers: {
-        Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
         'AUTH-TOKEN': localStorage.getItem('token'),
       },
@@ -20,6 +27,10 @@ const DoctorDetails = ({ match }) => {
       .catch(error => (error));
     setDoctor(response.data.doctor);
   }, []);
+
+  const handleAppointments = () => {
+    history.push('/appointments');
+  };
 
   const handleShowModal = () => {
     setShow(true);
@@ -29,13 +40,31 @@ const DoctorDetails = ({ match }) => {
     setShow(false);
   };
 
-  const handleInputChange = () => {
-    console.log('check me, for inputs! yei!!');
+  const handleInputChange = e => {
+    appointmentObj.appointments = Object.assign(appointmentObj.appointments, {
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = async e => {
     e.preventDefault();
+    const id = match.params.doctor_id;
+    await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors/${id}/appointments`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'AUTH-TOKEN': localStorage.getItem('token'),
+      },
+      body: JSON.stringify(appointmentObj),
+    })
+      .then(res => res.json())
+      .then(data => { setAppointment(data.data.appointment); })
+      .catch(err => err);
+    handleAppointments();
   };
+
+  if (Object.keys(user).length === 0) { return <Redirect to="/signin" />; }
 
   const preventDrag = e => e.preventDefault();
   return (
@@ -50,11 +79,13 @@ const DoctorDetails = ({ match }) => {
           <p>Icons</p>
         </div>
         <div>
-          <Modal
+          <AppointmentForm
             show={show}
             handleChange={handleInputChange}
             handleSubmit={handleFormSubmit}
             handleClose={handleHideModal}
+            docName={doctor.name}
+            uName={user.username}
           />
           <button type="button" onClick={handleShowModal}>BOOK AN APPOINTMENT</button>
         </div>
@@ -71,6 +102,18 @@ DoctorDetails.propTypes = {
       doctor_id: PropTypes.string,
     }),
   }).isRequired,
+  setAppointment: PropTypes.func.isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default DoctorDetails;
+const mapStateToProps = state => ({
+  appointments: state.appointments,
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setAppointment: value => dispatch(setAppointment(value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DoctorDetails);

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import './AppointmentForm.css';
 
-const Modal = ({
-  handleClose, show, handleSubmit, handleChange,
+const AppointmentForm = ({
+  handleClose, show, handleSubmit, handleChange, docName, uName,
 }) => {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
@@ -17,17 +17,17 @@ const Modal = ({
           </button>
         </div>
         <form data-testid="form" onSubmit={handleSubmit}>
-          <h3 data-testid="title" className="text-center">Book an appointment</h3>
+          <h3 data-testid="title" className="text-center appoint-title">Book an appointment</h3>
           <div className="form-group">
-            <label htmlFor="doctor-name">
+            <label htmlFor="doctorName">
               Doctor&apos;s Name
-              <input type="text" name="doctor-name" id="doctor-name" className="form-control" required onChange={handleChange} />
+              <input type="text" name="doctorName" id="doctorName" className="form-control" value={docName} readOnly required onChange={handleChange} />
             </label>
           </div>
           <div className="form-group">
-            <label htmlFor="doctor-id">
-              Doctor Ref. No.
-              <input type="number" name="doctor-id" id="doctor-id" className="form-control" required onChange={handleChange} />
+            <label htmlFor="username">
+              Username
+              <input type="text" name="username" id="username" className="form-control" value={uName} readOnly required onChange={handleChange} />
             </label>
           </div>
           <div className="form-group">
@@ -37,9 +37,9 @@ const Modal = ({
             </label>
           </div>
           <div className="form-group">
-            <label htmlFor="location">
-              Location
-              <input type="text" name="location" id="location" className="form-control" required onChange={handleChange} />
+            <label htmlFor="city">
+              City
+              <input type="text" name="city" id="city" className="form-control" required onChange={handleChange} />
             </label>
           </div>
           <button type="submit" className="p-0 m-0 text-center">Submit</button>
@@ -49,11 +49,13 @@ const Modal = ({
   );
 };
 
-Modal.propTypes = {
+AppointmentForm.propTypes = {
   handleClose: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
+  docName: PropTypes.string.isRequired,
+  uName: PropTypes.string.isRequired,
 };
 
-export default Modal;
+export default AppointmentForm;
