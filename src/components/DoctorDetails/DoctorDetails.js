@@ -6,9 +6,10 @@ import { Redirect } from 'react-router-dom';
 import AppointmentForm from '../AppointmentForm/AppointmentForm';
 import Sidebar from '../Sidebar/Sidebar';
 import { setAppointment } from '../../Redux/actions/index';
+import styles from './DoctorDetails.module.css';
 
 const DoctorDetails = ({
-  match, appointment, setAppointment, user, history,
+  match, setAppointment, user,
 }) => {
   const [doctor, setDoctor] = useState(null);
   const [show, setShow] = useState(false);
@@ -16,9 +17,9 @@ const DoctorDetails = ({
     appointment: {},
   };
 
-  const handleAppointments = () => {
-    history.push('/appointments');
-  };
+  // const handleAppointments = () => {
+  //   history.push('/appointments');
+  // };
 
   useEffect(async () => {
     const id = match.params.doctor_id;
@@ -45,13 +46,11 @@ const DoctorDetails = ({
     appointmentObj.appointment = Object.assign(appointmentObj.appointment, {
       [e.target.name]: e.target.value,
     });
-    // console.log(e.target.value);
   };
 
   const handleFormSubmit = async e => {
     e.preventDefault();
-    const id = match.params.doctor_id;
-    await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors/${id}/appointments`, {
+    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -63,13 +62,9 @@ const DoctorDetails = ({
       .then(res => res.json())
       .then(data => {
         setAppointment(data.data.appointment);
-        console.log(data);
-        if (Object.keys(appointment).length > 0) {
-          handleAppointments();
-        }
+        console.log(data.data.appointment);
       })
       .catch(err => console.log(err));
-    handleAppointments();
   };
 
   if (Object.keys(user).length === 0) { return <Redirect to="/" />; }
@@ -78,14 +73,17 @@ const DoctorDetails = ({
   return (
     <Sidebar content={
       doctor ? (
-        <section>
-          <div className="text-center" onDragStart={preventDrag}>
-            <div>
+        <div>
+          <div className="text-center row" onDragStart={preventDrag}>
+            <div className={`${styles.imgContainer} col-md-8`}>
               <img src={doctor.image.url} alt={doctor.name} />
             </div>
-            <h3>{doctor.name}</h3>
-            <p>{doctor.speciality}</p>
-            <p>Icons</p>
+            <div className={`${styles.leftNav} col-md-4`}>
+              <h3>{doctor.name}</h3>
+              <p>{doctor.speciality}</p>
+              <p>Icons</p>
+              <button type="button" className={styles.bookBtn} onClick={handleShowModal}>BOOK AN APPOINTMENT</button>
+            </div>
           </div>
           <div>
             <AppointmentForm
@@ -96,10 +94,10 @@ const DoctorDetails = ({
               docName={doctor.name}
               uName={user.username}
               location={doctor.location}
+              doctorId={doctor.id}
             />
-            <button type="button" onClick={handleShowModal}>BOOK AN APPOINTMENT</button>
           </div>
-        </section>
+        </div>
       ) : (
         <div className="text-center">Loading doctor&apos;s details...</div>
       )
@@ -116,8 +114,8 @@ DoctorDetails.propTypes = {
   }).isRequired,
   setAppointment: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
-  history: PropTypes.instanceOf(Object).isRequired,
-  appointment: PropTypes.instanceOf(Object).isRequired,
+  // history: PropTypes.instanceOf(Object).isRequired,
+  // appointment: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = state => ({

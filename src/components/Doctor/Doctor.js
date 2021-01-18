@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SocialIcon } from 'react-social-icons';
 
 import styles from './Doctor.module.css';
 
@@ -14,7 +15,14 @@ const Doctor = ({ doctor }) => {
         <img src={image.url} alt={name} />
       </div>
       <h3>{name}</h3>
+      <p>...........................</p>
       <p>{speciality}</p>
+      <span>
+        <SocialIcon url="http://linkedin.com/in/jaketrent" />
+        <SocialIcon url="http://linkedin.com/in/jaketrent" />
+        <SocialIcon url="http://linkedin.com/in/jaketrent" />
+        <SocialIcon network="twitter" bgColor="#ff5a01" />
+      </span>
       <p>Icons</p>
     </div>
   );

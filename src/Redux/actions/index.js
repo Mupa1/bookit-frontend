@@ -22,3 +22,8 @@ export const delAppointment = appoint => ({
   type: 'DEL_APPOINTMENT',
   payload: appoint,
 });
+
+export const getAppointments = appoints => ({
+  type: 'GET_APPOINTMENT',
+  payload: appoints,
+});

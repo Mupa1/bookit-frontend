@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import Appointment from '../Appointment/Appointment';
 import Sidebar from '../Sidebar/Sidebar';
-import { delAppointment } from '../../Redux/actions/index';
+import { getAppointments, delAppointment } from '../../Redux/actions/index';
 
-const Appointments = ({ appointments, delAppointment }) => {
+const Appointments = ({
+  appointment, getAppointments, delAppointment, user,
+}) => {
+  useEffect(async () => {
+    const response = await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'AUTH-TOKEN': localStorage.getItem('token'),
+      },
+    }).then(res => res.json())
+      .catch(error => (error));
+    getAppointments(response.data.appointment);
+  }, [getAppointments]);
+
   const handleRemoveAppointment = appointment => {
     delAppointment(appointment);
   };
 
+  if (Object.keys(user).length === 0) { return <Redirect to="/" />; }
+
   return (
-    <Sidebar content={(
+    <Sidebar content={appointment ? (
       <>
         <h1>Appointments</h1>
         <table>
@@ -25,29 +42,39 @@ const Appointments = ({ appointments, delAppointment }) => {
             </tr>
           </thead>
           <tbody>
-            {appointments.map(appointment => (
+            {appointment.map(appoint => (
               <Appointment
-                key={appointment.id}
-                appointment={appointment}
+                key={appoint.id}
+                appointment={appoint}
                 handleRemoveAppointment={handleRemoveAppointment}
               />
             ))}
           </tbody>
         </table>
       </>
+    ) : (
+      <h3 className="text-center">No appointments yet!</h3>
     )}
     />
   );
 };
 
 Appointments.propTypes = {
-  appointments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  appointment: PropTypes.arrayOf(PropTypes.object).isRequired,
   delAppointment: PropTypes.func.isRequired,
+  getAppointments: PropTypes.func.isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
 };
 
-const mapStateToProps = state => ({ appointments: state.appointments });
+const mapStateToProps = state => ({
+  appointments: state.appointments,
+  user: state.user,
+});
 
 const mapDispatchToProps = dispatch => ({
+  getAppointments: appointment => {
+    dispatch(getAppointments(appointment));
+  },
   delAppointment: appointment => {
     dispatch(delAppointment(appointment));
   },

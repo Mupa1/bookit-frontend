@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './AppointmentForm.css';
 
 const AppointmentForm = ({
-  handleClose, show, handleSubmit, handleChange, docName, uName, location,
+  handleClose, show, handleSubmit, handleChange, docName, uName, location, doctorId,
 }) => {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
@@ -42,6 +42,11 @@ const AppointmentForm = ({
               <input type="text" name="location" id="location" className="form-control" value={location} readOnly onChange={handleChange} />
             </label>
           </div>
+          <div className="form-group">
+            <label htmlFor="doctor_id">
+              <input type="text" name="doctor_id" id="doctor_id" className="form-control" value={doctorId} readOnly hidden onChange={handleChange} />
+            </label>
+          </div>
           <button type="submit" className="p-0 m-0 text-center">Submit</button>
         </form>
       </section>
@@ -57,6 +62,7 @@ AppointmentForm.propTypes = {
   docName: PropTypes.string.isRequired,
   uName: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
+  doctorId: PropTypes.number.isRequired,
 };
 
 export default AppointmentForm;
