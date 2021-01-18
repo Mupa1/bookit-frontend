@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Appointment from '../Appointment/Appointment';
+import Sidebar from '../Sidebar/Sidebar';
 import { delAppointment } from '../../Redux/actions/index';
 
 const Appointments = ({ appointments, delAppointment }) => {
@@ -11,28 +12,31 @@ const Appointments = ({ appointments, delAppointment }) => {
   };
 
   return (
-    <section>
-      <h1>Appointments</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Doctor&apos;s Name</th>
-            <th>Username</th>
-            <th>Date</th>
-            <th>City</th>
-          </tr>
-        </thead>
-        <tbody>
-          {appointments.map(appointment => (
-            <Appointment
-              key={appointment.id}
-              appointment={appointment}
-              handleRemoveAppointment={handleRemoveAppointment}
-            />
-          ))}
-        </tbody>
-      </table>
-    </section>
+    <Sidebar content={(
+      <>
+        <h1>Appointments</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Doctor&apos;s Name</th>
+              <th>Username</th>
+              <th>Date</th>
+              <th>City</th>
+            </tr>
+          </thead>
+          <tbody>
+            {appointments.map(appointment => (
+              <Appointment
+                key={appointment.id}
+                appointment={appointment}
+                handleRemoveAppointment={handleRemoveAppointment}
+              />
+            ))}
+          </tbody>
+        </table>
+      </>
+    )}
+    />
   );
 };
 

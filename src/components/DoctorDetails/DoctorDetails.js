@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import AppointmentForm from '../AppointmentForm/AppointmentForm';
+import Sidebar from '../Sidebar/Sidebar';
 import { setAppointment } from '../../Redux/actions/index';
 
 const DoctorDetails = ({
@@ -68,31 +69,34 @@ const DoctorDetails = ({
 
   const preventDrag = e => e.preventDefault();
   return (
-    doctor ? (
-      <section>
-        <div className="text-center" onDragStart={preventDrag}>
-          <div>
-            <img src={doctor.image.url} alt={doctor.name} />
+    <Sidebar content={
+      doctor ? (
+        <section>
+          <div className="text-center" onDragStart={preventDrag}>
+            <div>
+              <img src={doctor.image.url} alt={doctor.name} />
+            </div>
+            <h3>{doctor.name}</h3>
+            <p>{doctor.speciality}</p>
+            <p>Icons</p>
           </div>
-          <h3>{doctor.name}</h3>
-          <p>{doctor.speciality}</p>
-          <p>Icons</p>
-        </div>
-        <div>
-          <AppointmentForm
-            show={show}
-            handleChange={handleInputChange}
-            handleSubmit={handleFormSubmit}
-            handleClose={handleHideModal}
-            docName={doctor.name}
-            uName={user.username}
-          />
-          <button type="button" onClick={handleShowModal}>BOOK AN APPOINTMENT</button>
-        </div>
-      </section>
-    ) : (
-      <div className="text-center">Loading doctor&apos;s details...</div>
-    )
+          <div>
+            <AppointmentForm
+              show={show}
+              handleChange={handleInputChange}
+              handleSubmit={handleFormSubmit}
+              handleClose={handleHideModal}
+              docName={doctor.name}
+              uName={user.username}
+            />
+            <button type="button" onClick={handleShowModal}>BOOK AN APPOINTMENT</button>
+          </div>
+        </section>
+      ) : (
+        <div className="text-center">Loading doctor&apos;s details...</div>
+      )
+    }
+    />
   );
 };
 

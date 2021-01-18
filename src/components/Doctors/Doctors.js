@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { fetchDoctors } from '../../Redux/actions/index';
 import Doctor from '../Doctor/Doctor';
+import Sidebar from '../Sidebar/Sidebar';
 
 const Doctors = ({ doctors, setDoctors }) => {
   useEffect(async () => {
@@ -20,7 +21,7 @@ const Doctors = ({ doctors, setDoctors }) => {
   }, [setDoctors]);
 
   return (
-    doctors.length ? (
+    <Sidebar content={doctors.length ? (
       <ul>
         {doctors.map(doctor => (
           <Link to={`/doctors/${doctor.id}`} key={doctor.id}>
@@ -32,7 +33,8 @@ const Doctors = ({ doctors, setDoctors }) => {
       </ul>
     ) : (
       <div className="text-center">Loading doctors...</div>
-    )
+    )}
+    />
   );
 };
 
