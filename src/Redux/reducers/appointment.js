@@ -1,8 +1,8 @@
 const appointmentReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET APPOINTMENT':
+    case 'SET_APPOINTMENT':
       return [...state, action.payload];
-    case 'DEL APPOINTMENT':
+    case 'DEL_APPOINTMENT':
       return [...state.filter(appointment => appointment.id !== action.payload)];
     default:
       return state;

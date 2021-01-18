@@ -9,16 +9,16 @@ export const destroyUser = user => ({
 });
 
 export const fetchDoctors = doctors => ({
-  type: 'FETCH DOCTORS',
+  type: 'FETCH_DOCTORS',
   payload: doctors,
 });
 
 export const setAppointment = appoint => ({
-  type: 'SET APPOINTMENT',
+  type: 'SET_APPOINTMENT',
   payload: appoint,
 });
 
 export const delAppointment = appoint => ({
-  type: 'DEL APPOINTMENT',
+  type: 'DEL_APPOINTMENT',
   payload: appoint,
 });

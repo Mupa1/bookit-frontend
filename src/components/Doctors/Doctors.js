@@ -14,7 +14,6 @@ const Doctors = ({ doctors, setDoctors }) => {
     const response = await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors', {
       mode: 'cors',
       headers: {
-        Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
       },
     }).then(res => res.json())
@@ -36,7 +35,7 @@ const Doctors = ({ doctors, setDoctors }) => {
           <p>Please select a doctor to book an appointment</p>
           <p>...........................</p>
         </div>
-        <ul>
+        <div>
           <AliceCarousel
             responsive={resp}
             autoPlayInterval={3200}
@@ -49,13 +48,13 @@ const Doctors = ({ doctors, setDoctors }) => {
           >
             {doctors.map(doctor => (
               <Link to={`/doctors/${doctor.id}`} key={doctor.id}>
-                <li>
+                <div>
                   <Doctor doctor={doctor} />
-                </li>
+                </div>
               </Link>
             ))}
           </AliceCarousel>
-        </ul>
+        </div>
       </>
     ) : (
       <div className="text-center">Loading doctors...</div>

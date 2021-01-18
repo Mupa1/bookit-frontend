@@ -8,12 +8,16 @@ import Sidebar from '../Sidebar/Sidebar';
 import { setAppointment } from '../../Redux/actions/index';
 
 const DoctorDetails = ({
-  match, setAppointment, user, history,
+  match, appointment, setAppointment, user, history,
 }) => {
   const [doctor, setDoctor] = useState(null);
   const [show, setShow] = useState(false);
   const appointmentObj = {
-    appointments: {},
+    appointment: {},
+  };
+
+  const handleAppointments = () => {
+    history.push('/appointments');
   };
 
   useEffect(async () => {
@@ -27,11 +31,7 @@ const DoctorDetails = ({
     }).then(res => res.json())
       .catch(error => (error));
     setDoctor(response.data.doctor);
-  }, []);
-
-  const handleAppointments = () => {
-    history.push('/appointments');
-  };
+  }, [doctor]);
 
   const handleShowModal = () => {
     setShow(true);
@@ -42,9 +42,10 @@ const DoctorDetails = ({
   };
 
   const handleInputChange = e => {
-    appointmentObj.appointments = Object.assign(appointmentObj.appointments, {
+    appointmentObj.appointment = Object.assign(appointmentObj.appointment, {
       [e.target.name]: e.target.value,
     });
+    // console.log(e.target.value);
   };
 
   const handleFormSubmit = async e => {
@@ -60,12 +61,18 @@ const DoctorDetails = ({
       body: JSON.stringify(appointmentObj),
     })
       .then(res => res.json())
-      .then(data => { setAppointment(data.data.appointment); })
-      .catch(err => err);
+      .then(data => {
+        setAppointment(data.data.appointment);
+        console.log(data);
+        if (Object.keys(appointment).length > 0) {
+          handleAppointments();
+        }
+      })
+      .catch(err => console.log(err));
     handleAppointments();
   };
 
-  if (Object.keys(user).length === 0) { return <Redirect to="/signin" />; }
+  if (Object.keys(user).length === 0) { return <Redirect to="/" />; }
 
   const preventDrag = e => e.preventDefault();
   return (
@@ -88,6 +95,7 @@ const DoctorDetails = ({
               handleClose={handleHideModal}
               docName={doctor.name}
               uName={user.username}
+              location={doctor.location}
             />
             <button type="button" onClick={handleShowModal}>BOOK AN APPOINTMENT</button>
           </div>
@@ -109,15 +117,16 @@ DoctorDetails.propTypes = {
   setAppointment: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+  appointment: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = state => ({
-  appointments: state.appointments,
+  appointment: state.appointment,
   user: state.user,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setAppointment: value => dispatch(setAppointment(value)),
+  setAppointment: appointment => dispatch(setAppointment(appointment)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DoctorDetails);
