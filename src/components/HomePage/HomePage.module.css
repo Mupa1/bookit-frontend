@@ -3,6 +3,8 @@ h1 {
   font-size: 6vw;
   letter-spacing: 12px;
   padding: 100px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
 }
 
 button {
@@ -27,4 +29,9 @@ button:hover {
   color: #fff;
   text-align: center;
   margin: auto;
+  background-image: url('../../Assets/pngfind.com-doctor-png-532273.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  background-size: 50vh;
 }

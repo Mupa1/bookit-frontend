@@ -30,26 +30,33 @@ const Doctors = ({ doctors, setDoctors }) => {
 
   return (
     <Sidebar content={doctors.length ? (
-      <ul>
-        <AliceCarousel
-          responsive={resp}
-          autoPlayInterval={3200}
-          autoPlayDirection="ltr"
-          autoPlay
-          fadeOutAnimation
-          mouseTrackingEnabled
-          disableAutoPlayOnAction
-          dotsDisabled
-        >
-          {doctors.map(doctor => (
-            <Link to={`/doctors/${doctor.id}`} key={doctor.id}>
-              <li>
-                <Doctor doctor={doctor} />
-              </li>
-            </Link>
-          ))}
-        </AliceCarousel>
-      </ul>
+      <>
+        <div className="text-center">
+          <h3 className="font-weight-bold">OUR DOCTORS</h3>
+          <p>Please select a doctor to book an appointment</p>
+          <p>...........................</p>
+        </div>
+        <ul>
+          <AliceCarousel
+            responsive={resp}
+            autoPlayInterval={3200}
+            autoPlayDirection="ltr"
+            autoPlay
+            fadeOutAnimation
+            mouseTrackingEnabled
+            disableAutoPlayOnAction
+            dotsDisabled
+          >
+            {doctors.map(doctor => (
+              <Link to={`/doctors/${doctor.id}`} key={doctor.id}>
+                <li>
+                  <Doctor doctor={doctor} />
+                </li>
+              </Link>
+            ))}
+          </AliceCarousel>
+        </ul>
+      </>
     ) : (
       <div className="text-center">Loading doctors...</div>
     )}
