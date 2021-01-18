@@ -1,5 +1,7 @@
+import 'react-alice-carousel/lib/alice-carousel.css';
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import AliceCarousel from 'react-alice-carousel';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -20,16 +22,33 @@ const Doctors = ({ doctors, setDoctors }) => {
     setDoctors(response.data.doctor);
   }, [setDoctors]);
 
+  const resp = {
+    0: { items: 1 },
+    750: { items: 2 },
+    1024: { items: 3 },
+  };
+
   return (
     <Sidebar content={doctors.length ? (
       <ul>
-        {doctors.map(doctor => (
-          <Link to={`/doctors/${doctor.id}`} key={doctor.id}>
-            <li>
-              <Doctor doctor={doctor} />
-            </li>
-          </Link>
-        ))}
+        <AliceCarousel
+          responsive={resp}
+          autoPlayInterval={3200}
+          autoPlayDirection="ltr"
+          autoPlay
+          fadeOutAnimation
+          mouseTrackingEnabled
+          disableAutoPlayOnAction
+          dotsDisabled
+        >
+          {doctors.map(doctor => (
+            <Link to={`/doctors/${doctor.id}`} key={doctor.id}>
+              <li>
+                <Doctor doctor={doctor} />
+              </li>
+            </Link>
+          ))}
+        </AliceCarousel>
       </ul>
     ) : (
       <div className="text-center">Loading doctors...</div>

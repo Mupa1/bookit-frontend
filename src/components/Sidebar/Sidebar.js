@@ -8,8 +8,8 @@ const Sidebar = ({ content }) => (
   <>
     <section className={styles.sidebar}>
       <h3 className="pl-3">Bookit</h3>
-      <NavLink to="/doctors">DOCTORS</NavLink>
-      <NavLink to="/appointments">APPOINTMENTS</NavLink>
+      <NavLink activeClassName={styles.active} to="/doctors">DOCTORS</NavLink>
+      <NavLink activeClassName={styles.active} to="/appointments">APPOINTMENTS</NavLink>
     </section>
     <section className={styles.content}>
       {content}

@@ -20,12 +20,12 @@ body {
   text-decoration: none;
 }
 
-.sidebar a.activeClassName {
+.sidebar a.active {
   background-color: #96b70d;
   color: white;
 }
 
-.sidebar a:hover:not(.activeClassName) {
+.sidebar a:hover:not(.active) {
   background-color: #555;
   color: white;
 }
