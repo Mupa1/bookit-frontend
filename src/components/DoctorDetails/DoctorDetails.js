@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import AppointmentForm from '../AppointmentForm/AppointmentForm';
 import Sidebar from '../Sidebar/Sidebar';
 import { setAppointment } from '../../Redux/actions/index';
 import styles from './DoctorDetails.module.css';
@@ -12,14 +11,9 @@ const DoctorDetails = ({
   match, setAppointment, user,
 }) => {
   const [doctor, setDoctor] = useState(null);
-  const [show, setShow] = useState(false);
   const appointmentObj = {
     appointment: {},
   };
-
-  // const handleAppointments = () => {
-  //   history.push('/appointments');
-  // };
 
   useEffect(async () => {
     const id = match.params.doctor_id;
@@ -34,21 +28,14 @@ const DoctorDetails = ({
     setDoctor(response.data.doctor);
   }, [doctor]);
 
-  const handleShowModal = () => {
-    setShow(true);
-  };
-
-  const handleHideModal = () => {
-    setShow(false);
-  };
-
-  const handleInputChange = e => {
+  const handleChange = e => {
     appointmentObj.appointment = Object.assign(appointmentObj.appointment, {
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleFormSubmit = async e => {
+  const handleSubmit = async e => {
+    console.log(appointmentObj);
     e.preventDefault();
     await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
       method: 'POST',
@@ -59,10 +46,9 @@ const DoctorDetails = ({
       },
       body: JSON.stringify(appointmentObj),
     })
-      .then(res => res.json())
-      .then(data => {
-        setAppointment(data.data.appointment);
-        console.log(data.data.appointment);
+      .then(res => {
+        console.log(res);
+        setAppointment(res.data.appointment);
       })
       .catch(err => console.log(err));
   };
@@ -82,20 +68,49 @@ const DoctorDetails = ({
               <h3>{doctor.name}</h3>
               <p>{doctor.speciality}</p>
               <p>Icons</p>
-              <button type="button" className={styles.bookBtn} onClick={handleShowModal}>BOOK AN APPOINTMENT</button>
+              <div>
+                <section className="modal-main text-center">
+                  <form data-testid="form" onSubmit={handleSubmit}>
+                    <h3 data-testid="title" className="text-center appoint-title">Book an appointment</h3>
+                    <div className="form-group">
+                      <label htmlFor="doctor_name">
+                        Doctor&apos;s Name
+                        <input type="text" name="doctor_name" id="doctor_name" className="form-control" value={doctor.name} readOnly onChange={handleChange} />
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="username">
+                        Username
+                        <input type="text" name="username" id="username" className="form-control" value={user.username} readOnly onChange={handleChange} />
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="date">
+                        Date
+                        <input type="date" name="date" id="date" className="form-control" required onChange={handleChange} />
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="city">
+                        City
+                        <input type="text" name="city" id="city" className="form-control" value={doctor.location} readOnly onChange={handleChange} />
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="doctor_id">
+                        <input type="text" name="doctor_id" id="doctor_id" className="form-control" value={doctor.id} readOnly hidden onChange={handleChange} />
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="user_id">
+                        <input type="text" name="user_id" id="user_id" className="form-control" value={user.id} readOnly hidden onChange={handleChange} />
+                      </label>
+                    </div>
+                    <button type="submit" className="p-0 m-0 text-center">Submit</button>
+                  </form>
+                </section>
+              </div>
             </div>
-          </div>
-          <div>
-            <AppointmentForm
-              show={show}
-              handleChange={handleInputChange}
-              handleSubmit={handleFormSubmit}
-              handleClose={handleHideModal}
-              docName={doctor.name}
-              uName={user.username}
-              location={doctor.location}
-              doctorId={doctor.id}
-            />
           </div>
         </div>
       ) : (
@@ -114,8 +129,6 @@ DoctorDetails.propTypes = {
   }).isRequired,
   setAppointment: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
-  // history: PropTypes.instanceOf(Object).isRequired,
-  // appointment: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = state => ({

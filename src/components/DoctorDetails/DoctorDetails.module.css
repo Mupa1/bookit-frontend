@@ -17,3 +17,33 @@ img {
   margin-top: 50%;
   height: 70px;
 }
+
+.modal {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+  background: white;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+.close-btn {
+  text-align: right;
+}
+
+.close-btn button {
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.appoint-title {
+  margin-top: 0;
+}
