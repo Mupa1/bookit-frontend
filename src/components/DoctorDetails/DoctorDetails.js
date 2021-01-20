@@ -8,49 +8,55 @@ import { setAppointment } from '../../Redux/actions/index';
 import styles from './DoctorDetails.module.css';
 
 const DoctorDetails = ({
-  match, setAppointment, user,
+  match, user, setAppointment,
 }) => {
   const [doctor, setDoctor] = useState(null);
-  const appointmentObj = {
-    appointment: {},
+  const inputValue = {
+    userInput: {},
   };
 
   useEffect(async () => {
     const id = match.params.doctor_id;
-    const response = await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors/${id}`, {
+    await fetch(`http://localhost:3001/api/v1/doctors/${id}`, {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         'AUTH-TOKEN': localStorage.getItem('token'),
       },
     }).then(res => res.json())
+      .then(res => setDoctor(res.data.doctor))
       .catch(error => (error));
-    setDoctor(response.data.doctor);
-  }, [doctor]);
+  }, []);
 
   const handleChange = e => {
-    appointmentObj.appointment = Object.assign(appointmentObj.appointment, {
+    inputValue.userInput = Object.assign(inputValue.userInput, {
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async e => {
-    console.log(appointmentObj);
     e.preventDefault();
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
+    await fetch('http://localhost:3001/api/v1/appointments', {
       method: 'POST',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         'AUTH-TOKEN': localStorage.getItem('token'),
       },
-      body: JSON.stringify(appointmentObj),
+      body: JSON.stringify({
+        doctor_name: doctor.name,
+        city: doctor.location,
+        username: user.username,
+        doctor_id: doctor.id,
+        user_id: user.id,
+        date: inputValue.userInput.date,
+      }),
     })
+      .then(res => res.json())
       .then(res => {
-        console.log(res);
         setAppointment(res.data.appointment);
       })
-      .catch(err => console.log(err));
+      .catch(err => (err));
   };
 
   if (Object.keys(user).length === 0) { return <Redirect to="/" />; }
@@ -75,13 +81,13 @@ const DoctorDetails = ({
                     <div className="form-group">
                       <label htmlFor="doctor_name">
                         Doctor&apos;s Name
-                        <input type="text" name="doctor_name" id="doctor_name" className="form-control" value={doctor.name} readOnly onChange={handleChange} />
+                        <input type="text" name="doctor_name" id="doctor_name" className="form-control" value={doctor.name} readOnly />
                       </label>
                     </div>
                     <div className="form-group">
                       <label htmlFor="username">
                         Username
-                        <input type="text" name="username" id="username" className="form-control" value={user.username} readOnly onChange={handleChange} />
+                        <input type="text" name="username" id="username" className="form-control" value={user.username} readOnly />
                       </label>
                     </div>
                     <div className="form-group">
@@ -93,17 +99,17 @@ const DoctorDetails = ({
                     <div className="form-group">
                       <label htmlFor="city">
                         City
-                        <input type="text" name="city" id="city" className="form-control" value={doctor.location} readOnly onChange={handleChange} />
+                        <input type="text" name="city" id="city" className="form-control" value={doctor.location} readOnly />
                       </label>
                     </div>
                     <div className="form-group">
                       <label htmlFor="doctor_id">
-                        <input type="text" name="doctor_id" id="doctor_id" className="form-control" value={doctor.id} readOnly hidden onChange={handleChange} />
+                        <input type="text" name="doctor_id" id="doctor_id" className="form-control" value={doctor.id} readOnly hidden />
                       </label>
                     </div>
                     <div className="form-group">
                       <label htmlFor="user_id">
-                        <input type="text" name="user_id" id="user_id" className="form-control" value={user.id} readOnly hidden onChange={handleChange} />
+                        <input type="text" name="user_id" id="user_id" className="form-control" value={user.id} readOnly hidden />
                       </label>
                     </div>
                     <button type="submit" className="p-0 m-0 text-center">Submit</button>
@@ -132,7 +138,6 @@ DoctorDetails.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  appointment: state.appointment,
   user: state.user,
 });
 

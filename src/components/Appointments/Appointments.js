@@ -11,16 +11,16 @@ const Appointments = ({
   appointment, getAppointments, delAppointment, user,
 }) => {
   useEffect(async () => {
-    const response = await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
+    await fetch('http://localhost:3001/api/v1/appointments', {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         'AUTH-TOKEN': localStorage.getItem('token'),
       },
     }).then(res => res.json())
+      .then(data => getAppointments(data.data.appointment))
       .catch(error => (error));
-    getAppointments(response.data.appointment);
-  }, [getAppointments]);
+  }, []);
 
   const handleRemoveAppointment = appointment => {
     delAppointment(appointment);
@@ -31,7 +31,7 @@ const Appointments = ({
   return (
     <Sidebar content={appointment ? (
       <>
-        <h1>Appointments</h1>
+        <h3>Appointments</h3>
         <table>
           <thead>
             <tr>
@@ -67,7 +67,7 @@ Appointments.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  appointments: state.appointments,
+  appointment: state.appointment,
   user: state.user,
 });
 

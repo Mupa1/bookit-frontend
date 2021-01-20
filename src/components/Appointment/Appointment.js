@@ -1,14 +1,15 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 const Appointment = ({ appointment, handleRemoveAppointment }) => {
   const {
-    docName, username, date, city,
+    doctor_name, username, date, city,
   } = appointment;
 
   return (
     <tr>
-      <td>{docName}</td>
+      <td>{doctor_name}</td>
       <td>{username}</td>
       <td>{date}</td>
       <td>{city}</td>
@@ -21,8 +22,8 @@ const Appointment = ({ appointment, handleRemoveAppointment }) => {
 
 Appointment.propTypes = {
   appointment: PropTypes.shape({
-    docName: PropTypes.string,
-    username: PropTypes.number,
+    doctor_name: PropTypes.string,
+    username: PropTypes.string,
     date: PropTypes.string,
     city: PropTypes.string,
   }).isRequired,
