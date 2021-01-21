@@ -5,10 +5,10 @@ import { Redirect } from 'react-router-dom';
 
 import Appointment from '../Appointment/Appointment';
 import Sidebar from '../Sidebar/Sidebar';
-import { getAppointments, delAppointment } from '../../Redux/actions/index';
+import { getAppointments } from '../../Redux/actions/index';
 
 const Appointments = ({
-  appointment, getAppointments, delAppointment, user,
+  appointment, getAppointments, user,
 }) => {
   useEffect(async () => {
     await fetch('http://localhost:3001/api/v1/appointments', {
@@ -22,17 +22,13 @@ const Appointments = ({
       .catch(error => (error));
   }, []);
 
-  const handleRemoveAppointment = appointment => {
-    delAppointment(appointment);
-  };
-
   if (Object.keys(user).length === 0) { return <Redirect to="/" />; }
 
   return (
     <Sidebar content={appointment ? (
       <>
-        <h3>Appointments</h3>
-        <table>
+        <h2 className="font-weight-bold text-center">Appointments</h2>
+        <table className="table-responsive table-striped">
           <thead>
             <tr>
               <th>Doctor&apos;s Name</th>
@@ -46,7 +42,6 @@ const Appointments = ({
               <Appointment
                 key={appoint.id}
                 appointment={appoint}
-                handleRemoveAppointment={handleRemoveAppointment}
               />
             ))}
           </tbody>
@@ -61,7 +56,6 @@ const Appointments = ({
 
 Appointments.propTypes = {
   appointment: PropTypes.arrayOf(PropTypes.object).isRequired,
-  delAppointment: PropTypes.func.isRequired,
   getAppointments: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
 };
@@ -74,9 +68,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getAppointments: appointment => {
     dispatch(getAppointments(appointment));
-  },
-  delAppointment: appointment => {
-    dispatch(delAppointment(appointment));
   },
 });
 

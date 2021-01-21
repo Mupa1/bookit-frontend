@@ -55,6 +55,7 @@ const DoctorDetails = ({
       .then(res => res.json())
       .then(res => {
         setAppointment(res.data.appointment);
+        e.target.reset();
       })
       .catch(err => (err));
   };

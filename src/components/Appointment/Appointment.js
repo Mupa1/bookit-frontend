@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Appointment = ({ appointment, handleRemoveAppointment }) => {
+const Appointment = ({ appointment }) => {
   const {
     doctor_name, username, date, city,
   } = appointment;
@@ -13,9 +13,6 @@ const Appointment = ({ appointment, handleRemoveAppointment }) => {
       <td>{username}</td>
       <td>{date}</td>
       <td>{city}</td>
-      <td>
-        <button type="button" onClick={() => handleRemoveAppointment(appointment)}>Delete</button>
-      </td>
     </tr>
   );
 };
@@ -27,7 +24,6 @@ Appointment.propTypes = {
     date: PropTypes.string,
     city: PropTypes.string,
   }).isRequired,
-  handleRemoveAppointment: PropTypes.func.isRequired,
 };
 
 export default Appointment;
