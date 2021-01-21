@@ -29,29 +29,31 @@ const Appointments = ({
       <Sidebar />
       {appointment ? (
         <section className="content">
-          <h2 className="font-weight-bold text-center">Appointments</h2>
-          <table className="table-responsive table-striped">
-            <thead>
-              <tr>
-                <th>Doctor&apos;s Name</th>
-                <th>Username</th>
-                <th>Date</th>
-                <th>City</th>
-              </tr>
-            </thead>
-            <tbody>
-              {appointment.map(appoint => (
-                <Appointment
-                  key={appoint.id}
-                  appointment={appoint}
-                />
-              ))}
-            </tbody>
-          </table>
+          <h2 className="font-weight-bold text-center pb-5">APPOINTMENTS</h2>
+          <div className="table-responsive">
+            <table className="container table table-striped">
+              <thead>
+                <tr>
+                  <th>Doctor&apos;s Name</th>
+                  <th>Username</th>
+                  <th>Date</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                {appointment.map(appoint => (
+                  <Appointment
+                    key={appoint.id}
+                    appointment={appoint}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       ) : (
         <section className="content text-center">
-          <h4>No appointments yet!</h4>
+          <h4 className="py-5">No appointments yet!</h4>
         </section>
       )}
     </>

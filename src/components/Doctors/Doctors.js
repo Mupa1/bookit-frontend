@@ -33,7 +33,7 @@ const Doctors = ({ doctors, setDoctors }) => {
       {doctors.length ? (
         <section className="content">
           <div className="text-center">
-            <h3 className="font-weight-bold">OUR DOCTORS</h3>
+            <h2 className="font-weight-bold">OUR DOCTORS</h2>
             <p>Please select a doctor to book an appointment</p>
             <p>...........................</p>
           </div>

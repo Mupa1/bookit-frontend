@@ -73,13 +73,23 @@ const DoctorDetails = ({
               <img src={doctor.image.url} alt={doctor.name} />
             </div>
             <div className={`${styles.leftNav} col-md-4`}>
-              <h3>{doctor.name}</h3>
+              <h3 className="font-weight-bold">{doctor.name}</h3>
               <p>{doctor.speciality}</p>
               <p>Icons</p>
               <div>
                 <section className="modal-main text-center">
                   <form data-testid="form" onSubmit={handleSubmit}>
                     <h3 data-testid="title" className="text-center appoint-title">Book an appointment</h3>
+                    <div className="form-group m-0">
+                      <label htmlFor="doctor_id">
+                        <input type="text" name="doctor_id" id="doctor_id" className="form-control" value={doctor.id} readOnly hidden />
+                      </label>
+                    </div>
+                    <div className="form-group m-0">
+                      <label htmlFor="user_id">
+                        <input type="text" name="user_id" id="user_id" className="form-control" value={user.id} readOnly hidden />
+                      </label>
+                    </div>
                     <div className="form-group">
                       <label htmlFor="doctor_name">
                         Doctor&apos;s Name
@@ -102,16 +112,6 @@ const DoctorDetails = ({
                       <label htmlFor="city">
                         City
                         <input type="text" name="city" id="city" className="form-control" value={doctor.location} readOnly />
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="doctor_id">
-                        <input type="text" name="doctor_id" id="doctor_id" className="form-control" value={doctor.id} readOnly hidden />
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="user_id">
-                        <input type="text" name="user_id" id="user_id" className="form-control" value={user.id} readOnly hidden />
                       </label>
                     </div>
                     <button type="submit" className="p-0 m-0 text-center">Submit</button>

@@ -13,6 +13,10 @@ body {
   overflow: auto;
 }
 
+.sidebar h3 {
+  margin: 20px 0 50px auto;
+}
+
 .sidebar a {
   display: block;
   color: black;

@@ -27,6 +27,10 @@ code {
     monospace;
 }
 
+h2 {
+  margin-top: 100px;
+}
+
 a:hover {
   text-decoration: none;
 }

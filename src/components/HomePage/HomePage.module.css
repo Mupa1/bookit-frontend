@@ -1,10 +1,11 @@
-h1 {
+.homeContainer h1 {
   margin: 0;
   font-size: 6vw;
   letter-spacing: 12px;
   padding: 100px 0;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
+  text-shadow: 0 0 3px #000;
 }
 
 button {
@@ -33,5 +34,5 @@ button:hover {
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
-  background-size: 50vh;
+  background-size: 100vh;
 }
