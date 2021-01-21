@@ -64,9 +64,10 @@ const DoctorDetails = ({
 
   const preventDrag = e => e.preventDefault();
   return (
-    <Sidebar content={
-      doctor ? (
-        <div>
+    <>
+      <Sidebar />
+      {doctor ? (
+        <section className="content">
           <div className="text-center row" onDragStart={preventDrag}>
             <div className={`${styles.imgContainer} col-md-8`}>
               <img src={doctor.image.url} alt={doctor.name} />
@@ -119,12 +120,13 @@ const DoctorDetails = ({
               </div>
             </div>
           </div>
-        </div>
+        </section>
       ) : (
-        <div className="text-center">Loading doctor&apos;s details...</div>
-      )
-    }
-    />
+        <section className="text-center content">
+          <h4>Loading doctor&apos;s details...</h4>
+        </section>
+      )}
+    </>
   );
 };
 

@@ -25,32 +25,36 @@ const Appointments = ({
   if (Object.keys(user).length === 0) { return <Redirect to="/" />; }
 
   return (
-    <Sidebar content={appointment ? (
-      <>
-        <h2 className="font-weight-bold text-center">Appointments</h2>
-        <table className="table-responsive table-striped">
-          <thead>
-            <tr>
-              <th>Doctor&apos;s Name</th>
-              <th>Username</th>
-              <th>Date</th>
-              <th>City</th>
-            </tr>
-          </thead>
-          <tbody>
-            {appointment.map(appoint => (
-              <Appointment
-                key={appoint.id}
-                appointment={appoint}
-              />
-            ))}
-          </tbody>
-        </table>
-      </>
-    ) : (
-      <h3 className="text-center">No appointments yet!</h3>
-    )}
-    />
+    <>
+      <Sidebar />
+      {appointment ? (
+        <section className="content">
+          <h2 className="font-weight-bold text-center">Appointments</h2>
+          <table className="table-responsive table-striped">
+            <thead>
+              <tr>
+                <th>Doctor&apos;s Name</th>
+                <th>Username</th>
+                <th>Date</th>
+                <th>City</th>
+              </tr>
+            </thead>
+            <tbody>
+              {appointment.map(appoint => (
+                <Appointment
+                  key={appoint.id}
+                  appointment={appoint}
+                />
+              ))}
+            </tbody>
+          </table>
+        </section>
+      ) : (
+        <section className="content text-center">
+          <h4>No appointments yet!</h4>
+        </section>
+      )}
+    </>
   );
 };
 

@@ -28,38 +28,42 @@ const Doctors = ({ doctors, setDoctors }) => {
   };
 
   return (
-    <Sidebar content={doctors.length ? (
-      <>
-        <div className="text-center">
-          <h3 className="font-weight-bold">OUR DOCTORS</h3>
-          <p>Please select a doctor to book an appointment</p>
-          <p>...........................</p>
-        </div>
-        <div>
-          <AliceCarousel
-            responsive={resp}
-            autoPlayInterval={3200}
-            autoPlayDirection="ltr"
-            autoPlay
-            fadeOutAnimation
-            mouseTrackingEnabled
-            disableAutoPlayOnAction
-            dotsDisabled
-          >
-            {doctors.map(doctor => (
-              <Link to={`/doctors/${doctor.id}`} key={doctor.id}>
-                <div>
-                  <Doctor doctor={doctor} />
-                </div>
-              </Link>
-            ))}
-          </AliceCarousel>
-        </div>
-      </>
-    ) : (
-      <div className="text-center">Loading doctors...</div>
-    )}
-    />
+    <>
+      <Sidebar />
+      {doctors.length ? (
+        <section className="content">
+          <div className="text-center">
+            <h3 className="font-weight-bold">OUR DOCTORS</h3>
+            <p>Please select a doctor to book an appointment</p>
+            <p>...........................</p>
+          </div>
+          <div>
+            <AliceCarousel
+              responsive={resp}
+              autoPlayInterval={3200}
+              autoPlayDirection="ltr"
+              autoPlay
+              fadeOutAnimation
+              mouseTrackingEnabled
+              disableAutoPlayOnAction
+              dotsDisabled
+            >
+              {doctors.map(doctor => (
+                <Link to={`/doctors/${doctor.id}`} key={doctor.id}>
+                  <div>
+                    <Doctor doctor={doctor} />
+                  </div>
+                </Link>
+              ))}
+            </AliceCarousel>
+          </div>
+        </section>
+      ) : (
+        <section className="content text-center">
+          <h4>Loading doctors...</h4>
+        </section>
+      )}
+    </>
   );
 };
 
