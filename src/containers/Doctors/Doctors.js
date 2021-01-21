@@ -8,10 +8,11 @@ import { Link } from 'react-router-dom';
 import { fetchDoctors } from '../../Redux/actions/index';
 import Doctor from '../../components/Doctor/Doctor';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import './Doctors.css';
 
 const Doctors = ({ doctors, setDoctors }) => {
   useEffect(async () => {
-    const response = await fetch('http://localhost:3001/api/v1/doctors', {
+    const response = await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors', {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
@@ -47,6 +48,7 @@ const Doctors = ({ doctors, setDoctors }) => {
               mouseTrackingEnabled
               disableAutoPlayOnAction
               dotsDisabled
+              infinite
             >
               {doctors.map(doctor => (
                 <Link to={`/doctors/${doctor.id}`} key={doctor.id}>

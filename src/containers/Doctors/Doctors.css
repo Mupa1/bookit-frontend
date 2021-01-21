@@ -1,0 +1,33 @@
+.alice-carousel__next-btn {
+  right: 0;
+  top: 50%;
+  border-top-left-radius: 40%;
+  border-bottom-left-radius: 40%;
+}
+
+.alice-carousel__prev-btn {
+  left: 200px;
+  top: 50%;
+  border-top-right-radius: 40%;
+  border-bottom-right-radius: 40%;
+}
+
+.alice-carousel__prev-btn,
+.alice-carousel__next-btn {
+  position: fixed;
+  width: 70px;
+  background-color: #96b70d;
+  padding: 10px;
+}
+
+.alice-carousel__next-btn-item,
+.alice-carousel__prev-btn-item {
+  color: #fff;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .alice-carousel__prev-btn {
+    left: 0;
+  }
+}

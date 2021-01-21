@@ -13,9 +13,9 @@ const Doctor = ({ doctor }) => {
       <div className={styles.imgContainer}>
         <img src={image.url} alt={name} />
       </div>
-      <h3>{name}</h3>
+      <h5 className="font-weight-bold">{name}</h5>
       <p>...........................</p>
-      <p>{speciality}</p>
+      <p className={styles.speciality}>{speciality}</p>
       <p>Icons</p>
     </div>
   );

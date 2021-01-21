@@ -1,5 +1,5 @@
 .imgContainer {
-  height: 300px;
+  height: 260px;
 }
 
 img {
@@ -10,4 +10,8 @@ img {
 
 a {
   color: #555;
+}
+
+.speciality {
+  font-size: 80%;
 }
