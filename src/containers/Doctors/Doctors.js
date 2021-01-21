@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { fetchDoctors } from '../../Redux/actions/index';
-import Doctor from '../Doctor/Doctor';
-import Sidebar from '../Sidebar/Sidebar';
+import Doctor from '../../components/Doctor/Doctor';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 const Doctors = ({ doctors, setDoctors }) => {
   useEffect(async () => {

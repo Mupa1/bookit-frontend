@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import HomePage from '../HomePage/HomePage';
-import SignIn from '../SignIn/SignIn';
-import SignUp from '../SignUp/SignUp';
-import Doctors from '../Doctors/Doctors';
-import DoctorDetails from '../DoctorDetails/DoctorDetails';
-import Appointments from '../Appointments/Appointments';
+import SignIn from '../../containers/SignIn/SignIn';
+import SignUp from '../../containers/SignUp/SignUp';
+import Doctors from '../../containers/Doctors/Doctors';
+import DoctorDetails from '../../containers/DoctorDetails/DoctorDetails';
+import Appointments from '../../containers/Appointments/Appointments';
 
 const App = () => (
   <BrowserRouter>

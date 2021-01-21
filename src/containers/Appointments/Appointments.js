@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
-import Appointment from '../Appointment/Appointment';
-import Sidebar from '../Sidebar/Sidebar';
+import Appointment from '../../components/Appointment/Appointment';
+import Sidebar from '../../components/Sidebar/Sidebar';
 import { getAppointments } from '../../Redux/actions/index';
 
 const Appointments = ({
