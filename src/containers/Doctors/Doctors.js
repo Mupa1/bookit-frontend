@@ -3,19 +3,20 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AliceCarousel from 'react-alice-carousel';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { fetchDoctors } from '../../Redux/actions/index';
 import Doctor from '../../components/Doctor/Doctor';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './Doctors.css';
 
-const Doctors = ({ doctors, setDoctors }) => {
+const Doctors = ({ doctors, setDoctors, user }) => {
   useEffect(async () => {
     const response = await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors', {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
+        'AUTH-TOKEN': localStorage.getItem('token'),
       },
     }).then(res => res.json())
       .catch(error => (error));
@@ -27,6 +28,8 @@ const Doctors = ({ doctors, setDoctors }) => {
     750: { items: 2 },
     1024: { items: 3 },
   };
+
+  if (Object.keys(user).length === 0) { return <Redirect to="/" />; }
 
   return (
     <>
@@ -72,10 +75,12 @@ const Doctors = ({ doctors, setDoctors }) => {
 Doctors.propTypes = {
   doctors: PropTypes.instanceOf(Array).isRequired,
   setDoctors: PropTypes.func.isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = state => ({
   doctors: state.doctors,
+  user: state.user,
 });
 
 const mapDispatchToProps = dispatch => ({
