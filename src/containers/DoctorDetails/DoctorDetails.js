@@ -17,7 +17,7 @@ const DoctorDetails = ({
 
   useEffect(async () => {
     const id = match.params.doctor_id;
-    await fetch(`http://localhost:3001/api/v1/doctors/${id}`, {
+    await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors/${id}`, {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const DoctorDetails = ({
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await fetch('http://localhost:3001/api/v1/appointments', {
+    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
       method: 'POST',
       mode: 'cors',
       headers: {

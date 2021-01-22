@@ -18,7 +18,7 @@ const SignUp = ({ user, fetchUser, history }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await fetch('http://localhost:3001/api/v1/sign_up', {
+    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/sign_up', {
       method: 'POST',
       mode: 'cors',
       headers: {
