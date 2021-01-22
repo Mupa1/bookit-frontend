@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,6 +7,7 @@ import styles from '../../styles/Auth.module.css';
 import { fetchUser } from '../../Redux/actions/index';
 
 const SignIn = ({ user, fetchUser, history }) => {
+  const [error, setError] = useState('');
   const userObj = {
     sign_in: {},
   };
@@ -17,7 +18,7 @@ const SignIn = ({ user, fetchUser, history }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/sign_in', {
+    await fetch('http://localhost:3001/api/v1/sign_in', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -30,10 +31,17 @@ const SignIn = ({ user, fetchUser, history }) => {
         fetchUser(data.data.user);
         localStorage.setItem('token', data.data.user.authentication_token);
         if (Object.keys(user).length > 0) {
+          e.target.reset();
           handleSignIn();
         }
       })
-      .catch(err => err);
+      .catch(err => {
+        if (err) {
+          e.target.reset();
+          return `${err}: ${setError('Error: Incorrect email or password!')}`;
+        }
+        return setError('');
+      });
   };
 
   const handleChange = e => {
@@ -49,6 +57,7 @@ const SignIn = ({ user, fetchUser, history }) => {
       <div className={`${styles.formContainer} text-center`}>
         <form data-testid="form" onSubmit={handleSubmit}>
           <h3 data-testid="title" className="text-center">Sign In</h3>
+          <h6 className="text-danger">{error}</h6>
           <div className="form-group">
             <label htmlFor="email">
               Email

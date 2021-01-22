@@ -11,7 +11,7 @@ const Appointments = ({
   appointment, getAppointments, user,
 }) => {
   useEffect(async () => {
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
+    await fetch('http://localhost:3001/api/v1/appointments', {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',

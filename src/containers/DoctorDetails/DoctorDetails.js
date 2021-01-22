@@ -8,7 +8,7 @@ import { setAppointment } from '../../Redux/actions/index';
 import styles from './DoctorDetails.module.css';
 
 const DoctorDetails = ({
-  match, user, setAppointment,
+  match, user, setAppointment, history,
 }) => {
   const [doctor, setDoctor] = useState(null);
   const inputValue = {
@@ -17,7 +17,7 @@ const DoctorDetails = ({
 
   useEffect(async () => {
     const id = match.params.doctor_id;
-    await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors/${id}`, {
+    await fetch(`http://localhost:3001/api/v1/doctors/${id}`, {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
@@ -34,9 +34,13 @@ const DoctorDetails = ({
     });
   };
 
+  const handleAppointments = () => {
+    history.push('/appointments');
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
+    await fetch('http://localhost:3001/api/v1/appointments', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -56,6 +60,7 @@ const DoctorDetails = ({
       .then(res => {
         setAppointment(res.data.appointment);
         e.target.reset();
+        handleAppointments();
       })
       .catch(err => (err));
   };
@@ -138,6 +143,7 @@ DoctorDetails.propTypes = {
   }).isRequired,
   setAppointment: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -12,7 +12,7 @@ import './Doctors.css';
 
 const Doctors = ({ doctors, setDoctors }) => {
   useEffect(async () => {
-    const response = await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors', {
+    const response = await fetch('http://localhost:3001/api/v1/doctors', {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',

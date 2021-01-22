@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,6 +7,7 @@ import styles from '../../styles/Auth.module.css';
 import { fetchUser } from '../../Redux/actions/index';
 
 const SignUp = ({ user, fetchUser, history }) => {
+  const [error, setError] = useState('');
   const userObj = {
     user: {},
   };
@@ -17,7 +18,7 @@ const SignUp = ({ user, fetchUser, history }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/sign_up', {
+    await fetch('http://localhost:3001/api/v1/sign_up', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -31,9 +32,16 @@ const SignUp = ({ user, fetchUser, history }) => {
         localStorage.setItem('token', data.data.user.authentication_token);
         if (Object.keys(user).length > 0) {
           handleSignUp();
+          e.target.reset();
         }
       })
-      .catch(err => err);
+      .catch(err => {
+        if (err) {
+          e.target.reset();
+          return `${err}: ${setError('Error: Email already exists or password mismatch!')}`;
+        }
+        return setError('');
+      });
   };
 
   const handleChange = e => {
@@ -50,6 +58,7 @@ const SignUp = ({ user, fetchUser, history }) => {
       <div className={`${styles.formContainer} text-center`}>
         <form data-testid="form" onSubmit={handleSubmit}>
           <h3 data-testid="title" className="text-center">Register</h3>
+          <h6 className="text-danger">{error}</h6>
           <div className="form-group">
             <label htmlFor="username">
               Username
