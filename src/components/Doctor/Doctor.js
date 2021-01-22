@@ -9,11 +9,11 @@ const Doctor = ({ doctor }) => {
   const preventDrag = e => e.preventDefault();
 
   return (
-    <div className="text-center" onDragStart={preventDrag}>
+    <div className={`${styles.container} text-center`} onDragStart={preventDrag}>
       <div className={styles.imgContainer}>
         <img src={image.url} alt={name} />
       </div>
-      <h5 className="font-weight-bold">{name}</h5>
+      <h5 className={`${styles.name} font-weight-bold`}>{name}</h5>
       <p className={styles.dots}>...........................</p>
       <p className={styles.speciality}>{speciality}</p>
       <p className={`${styles.docIcons} d-flex justify-content-center`}>

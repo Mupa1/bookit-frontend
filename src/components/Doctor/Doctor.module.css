@@ -1,3 +1,12 @@
+.container:hover {
+  animation: myanime 5s infinite;
+  border-radius: 10px;
+}
+
+@keyframes myanime {
+  50% { box-shadow: 10px 20px 30px #a6a6a6; }
+}
+
 .imgContainer {
   height: 260px;
 }
@@ -25,4 +34,8 @@ a {
   height: 50px;
   width: 50px;
   margin: 0;
+}
+
+.name {
+  color: #000;
 }
