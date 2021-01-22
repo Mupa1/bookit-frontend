@@ -30,7 +30,7 @@ button:hover {
   color: #fff;
   text-align: center;
   margin: auto;
-  background-image: url('../../Assets/bg.png');
+  background-image: url('../../temp/bg.png');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
