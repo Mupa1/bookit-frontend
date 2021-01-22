@@ -1,5 +1,6 @@
 .imgContainer {
-  height: 90%;
+  height: 500px;
+  width: 100%;
   margin-top: 50px;
 }
 
@@ -47,4 +48,14 @@ img {
 
 .appoint-title {
   margin-top: 0;
+}
+
+.submit {
+  width: 130px;
+}
+
+@media screen and (max-width: 768px) {
+  .name {
+    margin-top: 5px;
+  }
 }

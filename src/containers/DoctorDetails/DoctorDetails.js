@@ -78,13 +78,12 @@ const DoctorDetails = ({
               <img src={doctor.image.url} alt={doctor.name} />
             </div>
             <div className={`${styles.leftNav} col-md-4`}>
-              <h3 className="font-weight-bold">{doctor.name}</h3>
+              <h3 className={`${styles.name} font-weight-bold`}>{doctor.name}</h3>
               <p>{doctor.speciality}</p>
-              <p>Icons</p>
               <div>
                 <section className="modal-main text-center">
                   <form data-testid="form" onSubmit={handleSubmit}>
-                    <h3 data-testid="title" className="text-center appoint-title">Book an appointment</h3>
+                    <h5 data-testid="title" className="text-center appoint-title pt-3">BOOK AN APPOINTMENT</h5>
                     <div className="form-group m-0">
                       <label htmlFor="doctor_id">
                         <input type="text" name="doctor_id" id="doctor_id" className="form-control" value={doctor.id} readOnly hidden />
@@ -119,7 +118,7 @@ const DoctorDetails = ({
                         <input type="text" name="city" id="city" className="form-control" value={doctor.location} readOnly />
                       </label>
                     </div>
-                    <button type="submit" className="p-0 m-0 text-center">Submit</button>
+                    <button type="submit" className={`${styles.submit} p-0 m-0 text-center`}>Submit</button>
                   </form>
                 </section>
               </div>

@@ -33,7 +33,7 @@ const Doctors = ({ doctors, setDoctors }) => {
       <Sidebar />
       {doctors.length ? (
         <section className="content">
-          <div className="text-center">
+          <div className="text-center docs-title">
             <h2 className="font-weight-bold">OUR DOCTORS</h2>
             <p>Please select a doctor to book an appointment</p>
             <p>...........................</p>

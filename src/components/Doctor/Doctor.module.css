@@ -12,6 +12,17 @@ a {
   color: #555;
 }
 
+.dots,
+.speciality {
+  color: #a6a6a6;
+}
+
 .speciality {
   font-size: 80%;
+}
+
+.docIcons img {
+  height: 50px;
+  width: 50px;
+  margin: 0;
 }

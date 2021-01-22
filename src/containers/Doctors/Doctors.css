@@ -26,6 +26,10 @@
   font-weight: bold;
 }
 
+.docs-title p {
+  color: #a6a6a6;
+}
+
 @media screen and (max-width: 768px) {
   .alice-carousel__prev-btn {
     left: 0;
