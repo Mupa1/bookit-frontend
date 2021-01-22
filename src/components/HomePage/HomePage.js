@@ -5,7 +5,7 @@ import styles from './HomePage.module.css';
 
 const HomePage = () => (
   <section className={styles.homeContainer}>
-    <h1>BOOK AN APPOINTMENT</h1>
+    <h1>BookIT</h1>
     <button type="button">
       <Link to="/signin" className="text-white">Sign In</Link>
     </button>
