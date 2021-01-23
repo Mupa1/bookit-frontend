@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage matches Homepage snapshot 1`] = `
+<section
+  className="homeContainer"
+>
+  <h1>
+    BookIT
+  </h1>
+  <button
+    type="button"
+  >
+    <a
+      className="text-white"
+      href="/signin"
+      onClick={[Function]}
+    >
+      Sign In
+    </a>
+  </button>
+  <button
+    type="button"
+  >
+    <a
+      className="text-white"
+      href="/signup"
+      onClick={[Function]}
+    >
+      Register
+    </a>
+  </button>
+</section>
+`;

@@ -16,7 +16,7 @@ const response = {
 };
 
 const res = authReducer(state, fetchUser(response));
-describe('actions', () => {
+describe('Auth Reducer', () => {
   test('should be of type object', () => {
     expect(typeof res).toBe('object');
   });

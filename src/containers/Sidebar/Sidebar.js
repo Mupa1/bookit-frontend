@@ -72,9 +72,13 @@ const mapDispatchToProps = dispatch => ({
   destroyUser: () => dispatch(destroyUser()),
 });
 
+Sidebar.defaultProps = {
+  history: {},
+};
+
 Sidebar.propTypes = {
   destroyUser: PropTypes.func.isRequired,
-  history: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object),
   user: PropTypes.instanceOf(Object).isRequired,
 };
 
