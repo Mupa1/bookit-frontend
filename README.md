@@ -66,7 +66,7 @@ Contributions, issues and feature requests are welcome!
 Feel free to check the [issues page](https://github.com/Mupa1/bookit-frontend/issues).
 
 ## Acknowledgements
-- Design idea by [Murat Korkmaz on Behance]https://www.behance.net/muratk
+- Design idea by [Murat Korkmaz on Behance](https://www.behance.net/muratk)
 - Icons from [Icon8.com](https://icons8.com/)
 
 ## Show your support
