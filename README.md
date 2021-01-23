@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# BookIT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Single Page Application for booking a doctor's appointment. The app is built with React and Redux libraries for the frontend and fetches data from a backend API built using Ruby on Rails.
 
-## Available Scripts
+## Features
+- Homepage
+- Signup and signin pages
+- Doctors page
+- Doctor's details page
+- Appointments page
 
-In the project directory, you can run:
+## Roadmap
+- The user logs in the app
+- The user selects a doctor from the list of doctors presented.
+- The user can see the specific doctor's details after selecting the doctor.
+- The user books an appointment using the 'book an appointment' form.
+- The user can see only the appointments he has booked from the appointments page.
+- The admin can see all the appointments created by all users. 
 
-### `yarn start`
+### Doctors Page
+<img width="1280" alt="bookit1" src="https://user-images.githubusercontent.com/44979953/105576006-285f8100-5d70-11eb-8f88-286a26a86564.png">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Doctor's Details Page
+<img width="1280" alt="bookit2" src="https://user-images.githubusercontent.com/44979953/105576019-390ff700-5d70-11eb-80bd-c5fdb3584b0b.png">
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Deployment
 
-### `yarn test`
+[Frontend Live Link](https://bookit-doc-appointments.netlify.app/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Backend Live Link](https://bookit-doc-appointments-api.herokuapp.com/)
 
-### `yarn build`
+## Built With
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React
+- React-Create-App
+- React-DOM
+- Redux
+- npm
+- CSS
+- ES6
+- [BookIT API](https://bookit-doc-appointments-api.herokuapp.com/) built by me
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To get a copy up and running follow these simple example steps:-
+- Clone `https://github.com/Mupa1/bookit-frontend` to your local machine.
+- Run `npm install` to install dependancies.
+- Run `npm start` to view the app live on your browser (localhost port 3000).
 
-### `yarn eject`
+## Automated Tests
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ > npm run test
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Author
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+👤 **Mupa M'mbetsa Nzaphila**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Github: [@mupa1](https://github.com/Mupa1)
+- Twitter: [@mupa_mmbetsa](https://twitter.com/mupa_mmbetsa)
+- Linkedin: [mupa-mmbetsa](https://www.linkedin.com/in/mupa-mmbetsa)
 
-## Learn More
+## 🤝 Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Contributions, issues and feature requests are welcome!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Feel free to check the [issues page](https://github.com/Mupa1/bookit-frontend/issues).
 
-### Code Splitting
+## Acknowledgements
+- Design idea by [Murat Korkmaz on Behance]https://www.behance.net/muratk
+- Icons from [Icon8.com](https://icons8.com/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Show your support
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Give a ⭐️ if you like this project!
