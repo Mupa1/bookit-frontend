@@ -11,6 +11,6 @@ describe('HomePage', () => {
         <HomePage />
       </Router>,
     );
-    expect(screen.getByText('BOOK AN APPOINTMENT')).toBeInTheDocument();
+    expect(screen.getByText('BookIT')).toBeInTheDocument();
   });
 });

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 import Appointment from '../../components/Appointment/Appointment';
-import Sidebar from '../../components/Sidebar/Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import { getAppointments } from '../../Redux/actions/index';
 
 const Appointments = ({

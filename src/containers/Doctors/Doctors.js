@@ -7,7 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { fetchDoctors } from '../../Redux/actions/index';
 import Doctor from '../../components/Doctor/Doctor';
-import Sidebar from '../../components/Sidebar/Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import './Doctors.css';
 
 const Doctors = ({ doctors, setDoctors, user }) => {
