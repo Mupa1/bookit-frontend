@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import styles from '../../styles/Auth.module.css';
-import { fetchUser } from '../../Redux/actions/index';
+import { userLogin } from '../../api';
 
-const SignIn = ({ user, fetchUser, history }) => {
-  const [error, setError] = useState('');
+const SignIn = ({ history }) => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+
   const userObj = {
     sign_in: {},
   };
@@ -18,30 +20,11 @@ const SignIn = ({ user, fetchUser, history }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/sign_in', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userObj),
-    })
-      .then(res => res.json())
-      .then(data => {
-        fetchUser(data.data.user);
-        localStorage.setItem('token', data.data.user.authentication_token);
-        if (Object.keys(user).length > 0) {
-          e.target.reset();
-          handleSignIn();
-        }
-      })
-      .catch(err => {
-        if (err) {
-          e.target.reset();
-          return `${err}: ${setError('Error: Incorrect email or password!')}`;
-        }
-        return setError('');
-      });
+    dispatch(userLogin(userObj));
+    if (Object.keys(user).length > 0) {
+      handleSignIn();
+      e.target.reset();
+    }
   };
 
   const handleChange = e => {
@@ -57,7 +40,6 @@ const SignIn = ({ user, fetchUser, history }) => {
       <div className={`${styles.formContainer} text-center`}>
         <form data-testid="form" onSubmit={handleSubmit}>
           <h3 data-testid="title" className="text-center">Sign In</h3>
-          <h6 className="text-danger">{error}</h6>
           <div className="form-group">
             <label htmlFor="email">
               Email
@@ -82,16 +64,8 @@ const SignIn = ({ user, fetchUser, history }) => {
   );
 };
 
-const mapStateToProps = state => ({ user: state.user });
-
-const mapDispatchToProps = dispatch => ({
-  fetchUser: value => dispatch(fetchUser(value)),
-});
-
 SignIn.propTypes = {
-  fetchUser: PropTypes.func.isRequired,
-  user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default SignIn;

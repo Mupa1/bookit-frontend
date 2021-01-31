@@ -1,38 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Sidebar from '../Sidebar/Sidebar';
-import { setAppointment } from '../../Redux/actions/index';
 import styles from './DoctorDetails.module.css';
+import { fetchADoctor, bookAppointment } from '../../api';
 
 const DoctorDetails = ({
-  match, user, setAppointment, history,
+  match, history,
 }) => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
   const [doctor, setDoctor] = useState(null);
-  const inputValue = {
-    userInput: {},
-  };
-
-  useEffect(async () => {
-    const id = match.params.doctor_id;
-    await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors/${id}`, {
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        'AUTH-TOKEN': localStorage.getItem('token'),
-      },
-    }).then(res => res.json())
-      .then(res => setDoctor(res.data.doctor))
-      .catch(error => (error));
-  }, []);
+  const [data, setData] = useState({
+    doctor_name: '',
+    city: '',
+    username: '',
+    doctor_id: '',
+    user_id: '',
+    date: '',
+  });
 
   const handleChange = e => {
-    inputValue.userInput = Object.assign(inputValue.userInput, {
+    setData({
       [e.target.name]: e.target.value,
+      doctor_name: doctor.name,
+      city: doctor.location,
+      username: user.username,
+      doctor_id: doctor.id,
+      user_id: user.id,
     });
   };
+
+  useEffect(() => {
+    const id = match.params.doctor_id;
+    fetchADoctor(id, setDoctor);
+  }, []);
 
   const handleAppointments = () => {
     history.push('/appointments');
@@ -40,32 +43,17 @@ const DoctorDetails = ({
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        'AUTH-TOKEN': localStorage.getItem('token'),
-      },
-      body: JSON.stringify({
-        doctor_name: doctor.name,
-        city: doctor.location,
-        username: user.username,
-        doctor_id: doctor.id,
-        user_id: user.id,
-        date: inputValue.userInput.date,
-      }),
-    })
-      .then(res => res.json())
-      .then(res => {
-        setAppointment(res.data.appointment);
-        e.target.reset();
-        handleAppointments();
-      })
-      .catch(err => (err));
+    dispatch(bookAppointment(data));
+    handleAppointments();
+    setData({
+      doctor_name: '',
+      city: '',
+      username: '',
+      doctor_id: '',
+      user_id: '',
+      date: '',
+    });
   };
-
-  if (Object.keys(user).length === 0) { return <Redirect to="/" />; }
 
   const preventDrag = e => e.preventDefault();
   return (
@@ -140,17 +128,7 @@ DoctorDetails.propTypes = {
       doctor_id: PropTypes.string,
     }),
   }).isRequired,
-  setAppointment: PropTypes.func.isRequired,
-  user: PropTypes.instanceOf(Object).isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = dispatch => ({
-  setAppointment: appointment => dispatch(setAppointment(appointment)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(DoctorDetails);
+export default DoctorDetails;

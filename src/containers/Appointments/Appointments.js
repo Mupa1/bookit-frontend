@@ -1,33 +1,22 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Appointment from '../../components/Appointment/Appointment';
 import Sidebar from '../Sidebar/Sidebar';
-import { getAppointments } from '../../Redux/actions/index';
+import { fetchAppointments } from '../../api';
 
-const Appointments = ({
-  appointment, getAppointments, user,
-}) => {
-  useEffect(async () => {
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        'AUTH-TOKEN': localStorage.getItem('token'),
-      },
-    }).then(res => res.json())
-      .then(data => getAppointments(data.data.appointment))
-      .catch(error => (error));
+const Appointments = () => {
+  const dispatch = useDispatch();
+  const appointments = useSelector(state => state.appointments.appointments);
+
+  useEffect(() => {
+    dispatch(fetchAppointments());
   }, []);
-
-  if (Object.keys(user).length === 0) { return <Redirect to="/" />; }
 
   return (
     <>
       <Sidebar />
-      {appointment ? (
+      {appointments.length ? (
         <section className="content">
           <h2 className="font-weight-bold text-center pb-5">APPOINTMENTS</h2>
           <div className="table-responsive">
@@ -41,10 +30,10 @@ const Appointments = ({
                 </tr>
               </thead>
               <tbody>
-                {appointment.map(appoint => (
+                {appointments.map(appointment => (
                   <Appointment
-                    key={appoint.id}
-                    appointment={appoint}
+                    key={appointment.id}
+                    appointment={appointment}
                   />
                 ))}
               </tbody>
@@ -60,21 +49,4 @@ const Appointments = ({
   );
 };
 
-Appointments.propTypes = {
-  appointment: PropTypes.arrayOf(PropTypes.object).isRequired,
-  getAppointments: PropTypes.func.isRequired,
-  user: PropTypes.instanceOf(Object).isRequired,
-};
-
-const mapStateToProps = state => ({
-  appointment: state.appointment,
-  user: state.user,
-});
-
-const mapDispatchToProps = dispatch => ({
-  getAppointments: appointment => {
-    dispatch(getAppointments(appointment));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Appointments);
+export default Appointments;

@@ -3,9 +3,8 @@ export const fetchUser = user => ({
   payload: user,
 });
 
-export const destroyUser = user => ({
+export const destroyUser = () => ({
   type: 'LOGOUT',
-  payload: user,
 });
 
 export const fetchDoctors = doctors => ({

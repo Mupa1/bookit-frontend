@@ -17,7 +17,8 @@
     "react-scripts": "4.0.1",
     "react-social-icons": "^4.1.0",
     "react-test-renderer": "^17.0.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",

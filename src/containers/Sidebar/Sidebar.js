@@ -1,35 +1,24 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import styles from './Sidebar.module.css';
 import sideBarToggle from '../../dom/index';
-import { destroyUser } from '../../Redux/actions/index';
+import { signOut } from '../../api';
 
-const Sidebar = ({
-  user, destroyUser, history,
-}) => {
+const Sidebar = ({ history }) => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+
   const handleHomepage = () => {
-    history.push('/homepage');
+    history.push('/');
   };
 
   const handleLogOut = async () => {
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/log_out', {
-      method: 'DELETE',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        'AUTH-TOKEN': localStorage.getItem('token'),
-      },
-    })
-      .then(res => res.json())
-      .then(() => {
-        destroyUser();
-        handleHomepage();
-        localStorage.clear();
-      })
-      .catch(err => err);
+    dispatch(signOut());
+    handleHomepage();
+    localStorage.clear();
   };
 
   return (
@@ -48,7 +37,7 @@ const Sidebar = ({
         <NavLink activeClassName={styles.active} to="/appointments">APPOINTMENTS</NavLink>
         <div className={styles.footer}>
           <div>
-            <button className={styles.logout} type="button" onClick={handleLogOut}>LogOut</button>
+            <button className={styles.logout} type="button" onClick={handleLogOut}>Logout</button>
           </div>
           {' '}
           <p className="d-flex">
@@ -64,22 +53,8 @@ const Sidebar = ({
   );
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = dispatch => ({
-  destroyUser: () => dispatch(destroyUser()),
-});
-
-Sidebar.defaultProps = {
-  history: {},
-};
-
 Sidebar.propTypes = {
-  destroyUser: PropTypes.func.isRequired,
-  history: PropTypes.instanceOf(Object),
-  user: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default withRouter(Sidebar);

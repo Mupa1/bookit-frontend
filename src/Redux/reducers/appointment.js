@@ -1,9 +1,19 @@
-const appointmentReducer = (state = [], action) => {
+const initialState = {
+  appointments: [],
+};
+
+const appointmentReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_APPOINTMENT':
-      return action.payload;
+      return {
+        ...state,
+        appointments: action.payload,
+      };
     case 'SET_APPOINTMENT':
-      return [...state, action.payload];
+      return {
+        ...state,
+        appointments: action.payload,
+      };
     default:
       return state;
   }

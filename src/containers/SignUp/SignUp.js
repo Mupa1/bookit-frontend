@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import styles from '../../styles/Auth.module.css';
-import { fetchUser } from '../../Redux/actions/index';
+import { userRegistration } from '../../api';
 
-const SignUp = ({ user, fetchUser, history }) => {
-  const [error, setError] = useState('');
+const SignUp = ({ history }) => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
   const userObj = {
     user: {},
   };
@@ -18,30 +19,11 @@ const SignUp = ({ user, fetchUser, history }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/sign_up', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userObj),
-    })
-      .then(res => res.json())
-      .then(data => {
-        fetchUser(data.data.user);
-        localStorage.setItem('token', data.data.user.authentication_token);
-        if (Object.keys(user).length > 0) {
-          handleSignUp();
-          e.target.reset();
-        }
-      })
-      .catch(err => {
-        if (err) {
-          e.target.reset();
-          return `${err}: ${setError('Error: Email already exists or password mismatch!')}`;
-        }
-        return setError('');
-      });
+    dispatch(userRegistration(userObj));
+    if (Object.keys(user).length > 0) {
+      handleSignUp();
+      e.target.reset();
+    }
   };
 
   const handleChange = e => {
@@ -58,7 +40,6 @@ const SignUp = ({ user, fetchUser, history }) => {
       <div className={`${styles.formContainer} text-center`}>
         <form data-testid="form" onSubmit={handleSubmit}>
           <h3 data-testid="title" className="text-center">Register</h3>
-          <h6 className="text-danger">{error}</h6>
           <div className="form-group">
             <label htmlFor="username">
               Username
@@ -77,12 +58,6 @@ const SignUp = ({ user, fetchUser, history }) => {
               <input type="password" name="password" id="password" className="form-control" required onChange={handleChange} />
             </label>
           </div>
-          <div className="form-group">
-            <label htmlFor="confirm-password">
-              Confirm Password
-              <input type="password" name="confirm-password" id="confirm-password" className="form-control" required onChange={handleChange} />
-            </label>
-          </div>
           <button type="submit" className="p-0 m-0">Submit</button>
           <div>
             Already have an account.
@@ -95,16 +70,8 @@ const SignUp = ({ user, fetchUser, history }) => {
   );
 };
 
-const mapStateToProps = state => ({ user: state.user });
-
-const mapDispatchToProps = dispatch => ({
-  fetchUser: value => dispatch(fetchUser(value)),
-});
-
 SignUp.propTypes = {
-  fetchUser: PropTypes.func.isRequired,
-  user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default SignUp;
