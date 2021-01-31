@@ -53,7 +53,7 @@ Array [
           onClick={[Function]}
           type="button"
         >
-          LogOut
+          Logout
         </button>
       </div>
        
