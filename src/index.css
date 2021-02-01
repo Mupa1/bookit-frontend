@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+}
+
+code {
+  font-family:
+    source-code-pro,
+    Menlo,
+    Monaco,
+    Consolas,
+    'Courier New',
+    monospace;
+}
+
+h2 {
+  margin-top: 100px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+li {
+  list-style: none;
+}
+
+section.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+  section.content {
+    margin-left: 0;
+  }
+}

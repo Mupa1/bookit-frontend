@@ -1,0 +1,41 @@
+.container:hover {
+  animation: myanime 5s infinite;
+  border-radius: 10px;
+}
+
+@keyframes myanime {
+  50% { box-shadow: 10px 20px 30px #a6a6a6; }
+}
+
+.imgContainer {
+  height: 260px;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: scale-down;
+}
+
+a {
+  color: #555;
+}
+
+.dots,
+.speciality {
+  color: #a6a6a6;
+}
+
+.speciality {
+  font-size: 80%;
+}
+
+.docIcons img {
+  height: 50px;
+  width: 50px;
+  margin: 0;
+}
+
+.name {
+  color: #000;
+}

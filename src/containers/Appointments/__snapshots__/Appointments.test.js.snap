@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Appointments matches Appointments snapshot 1`] = `
+Array [
+  <button
+    className="toggler"
+    onClick={[Function]}
+    type="button"
+  >
+    <img
+      alt="menu-icon"
+      src="https://img.icons8.com/ios-filled/50/000000/menu--v1.png"
+    />
+  </button>,
+  <section
+    className="sidebar sidebar"
+  >
+    <div
+      className="header d-flex justify-content-start align-items-center"
+    >
+      <img
+        alt="user"
+        className="userlogo"
+        src="https://img.icons8.com/carbon-copy/24/000000/user-male-circle.png"
+      />
+    </div>
+     
+    <h3
+      className="pl-3 font-weight-bold"
+    >
+      BookIT
+    </h3>
+    <a
+      aria-current={null}
+      href="/doctors"
+      onClick={[Function]}
+    >
+      DOCTORS
+    </a>
+    <a
+      aria-current={null}
+      href="/appointments"
+      onClick={[Function]}
+    >
+      APPOINTMENTS
+    </a>
+    <div
+      className="footer"
+    >
+      <div>
+        <button
+          className="logout"
+          onClick={[Function]}
+          type="button"
+        >
+          Logout
+        </button>
+      </div>
+       
+      <p
+        className="d-flex"
+      >
+        <img
+          alt="twitter-icon"
+          src="https://img.icons8.com/android/24/000000/twitter.png"
+        />
+        <img
+          alt="fb-icon"
+          src="https://img.icons8.com/android/24/000000/facebook-new.png"
+        />
+        <img
+          alt="google-icon"
+          src="https://img.icons8.com/android/24/000000/google-plus.png"
+        />
+        <img
+          alt="vimeo-icon"
+          src="https://img.icons8.com/material/24/000000/vimeo.png"
+        />
+        <img
+          alt="pinterest-icon"
+          src="https://img.icons8.com/metro/24/000000/pinterest.png"
+        />
+      </p>
+    </div>
+  </section>,
+  <section
+    className="content text-center"
+  >
+    <h4
+      className="py-5"
+    >
+      No appointments yet!
+    </h4>
+  </section>,
+]
+`;
