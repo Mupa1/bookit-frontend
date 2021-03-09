@@ -7,27 +7,27 @@ exports[`HomePage matches Homepage snapshot 1`] = `
   <h1>
     BookIT
   </h1>
-  <button
-    type="button"
+  <a
+    className="text-white"
+    href="/signin"
+    onClick={[Function]}
   >
-    <a
-      className="text-white"
-      href="/signin"
-      onClick={[Function]}
+    <button
+      type="button"
     >
       Sign In
-    </a>
-  </button>
-  <button
-    type="button"
+    </button>
+  </a>
+  <a
+    className="text-white"
+    href="/signup"
+    onClick={[Function]}
   >
-    <a
-      className="text-white"
-      href="/signup"
-      onClick={[Function]}
+    <button
+      type="button"
     >
       Register
-    </a>
-  </button>
+    </button>
+  </a>
 </section>
 `;

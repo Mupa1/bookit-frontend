@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-
+import moment from 'moment';
 import Sidebar from '../Sidebar/Sidebar';
 import styles from './DoctorDetails.module.css';
 import { fetchADoctor, bookAppointment } from '../../api';
@@ -55,6 +55,8 @@ const DoctorDetails = ({
     });
   };
 
+  const today = moment().format('YYYY-MM-DDThh:mm');
+
   const preventDrag = e => e.preventDefault();
   return (
     <>
@@ -89,21 +91,28 @@ const DoctorDetails = ({
                       </label>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="username">
-                        Username
-                        <input type="text" name="username" id="username" className="form-control" value={user.username} readOnly />
-                      </label>
-                    </div>
-                    <div className="form-group">
                       <label htmlFor="date">
                         Date
-                        <input type="date" name="date" id="date" className="form-control" required onChange={handleChange} />
+                        <input
+                          type="datetime-local"
+                          name="date"
+                          id="date"
+                          className="form-control"
+                          required
+                          onChange={handleChange}
+                          min={today}
+                        />
                       </label>
                     </div>
                     <div className="form-group">
                       <label htmlFor="city">
                         City
                         <input type="text" name="city" id="city" className="form-control" value={doctor.location} readOnly />
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="username">
+                        <input type="text" name="username" id="username" className="form-control" value={user.username} readOnly hidden />
                       </label>
                     </div>
                     <button type="submit" className={`${styles.submit} p-0 m-0 text-center`}>Submit</button>

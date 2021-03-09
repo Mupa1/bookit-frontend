@@ -32,10 +32,6 @@
   color: white;
 }
 
-.header {
-  border-bottom: 1px solid #f1f1f1;
-}
-
 .footer {
   margin-top: 400px;
   position: fixed;
@@ -61,13 +57,6 @@
 
 .displayBlock {
   display: block;
-}
-
-.userlogo {
-  height: 30px;
-  width: 30px;
-  padding: 0;
-  margin: 16px;
 }
 
 .logout {

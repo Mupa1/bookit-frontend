@@ -18,10 +18,10 @@ A Single Page Application for booking a doctor's appointment. The app is built w
 - The admin can see all the appointments created by all users. 
 
 ### Doctors Page
-<img width="1280" alt="bookit1" src="https://user-images.githubusercontent.com/44979953/105576006-285f8100-5d70-11eb-8f88-286a26a86564.png">
+<img width="1280" alt="Screen Shot 2021-03-09 at 21 47 04" src="https://user-images.githubusercontent.com/44979953/110535892-1c156480-8121-11eb-8e8c-3194ed5aefe8.png">
 
-### Doctor's Details Page
-<img width="1280" alt="bookit2" src="https://user-images.githubusercontent.com/44979953/105576019-390ff700-5d70-11eb-80bd-c5fdb3584b0b.png">
+### Appointments Page
+<img width="1280" alt="Screen Shot 2021-03-09 at 21 43 14" src="https://user-images.githubusercontent.com/44979953/110535953-2afc1700-8121-11eb-9d6b-ab4ecf4f030e.png">
 
 ## Deployment
 
@@ -38,7 +38,7 @@ A Single Page Application for booking a doctor's appointment. The app is built w
 - npm
 - CSS
 - ES6
-- [BookIT API](https://bookit-doc-appointments-api.herokuapp.com/) built by me
+- [BookIT API](https://bookit-doc-appointments-api.herokuapp.com/)
 
 ## Getting Started
 
