@@ -72,3 +72,4 @@ Feel free to check the [issues page](https://github.com/Mupa1/bookit-frontend/is
 ## Show your support
 
 Give a ⭐️ if you like this project!
+ 
