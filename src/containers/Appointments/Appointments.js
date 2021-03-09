@@ -1,17 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Appointment from '../../components/Appointment/Appointment';
 import Sidebar from '../Sidebar/Sidebar';
-import { fetchAppointments } from '../../api';
+import { fetchAppointments, deleteAppointments } from '../../api';
 
 const Appointments = () => {
   const dispatch = useDispatch();
-  const appointments = useSelector(state => state.appointments.appointments);
+  const appointments = useSelector(state => state.appointments);
+  const [isLoaded, setIsLoaded] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchAppointments());
-  }, []);
+    if (appointments.length > 0) {
+      setIsLoaded(true);
+    }
+    if (localStorage.getItem('token')) {
+      dispatch(fetchAppointments());
+    }
+    return () => {
+      setIsLoaded(false);
+    };
+  }, [isLoaded, appointments.length]);
+
+  const handleDeleteAppointment = e => {
+    const { id } = e.target.dataset;
+    dispatch(deleteAppointments(id));
+  };
 
   return (
     <>
@@ -27,6 +41,7 @@ const Appointments = () => {
                   <th>Username</th>
                   <th>Date</th>
                   <th>City</th>
+                  <th>Cancel Appointment</th>
                 </tr>
               </thead>
               <tbody>
@@ -34,6 +49,8 @@ const Appointments = () => {
                   <Appointment
                     key={appointment.id}
                     appointment={appointment}
+                    handleClick={handleDeleteAppointment}
+                    dataId={appointment.id}
                   />
                 ))}
               </tbody>
@@ -42,7 +59,7 @@ const Appointments = () => {
         </section>
       ) : (
         <section className="content text-center">
-          <h4 className="py-5">No appointments yet!</h4>
+          <h4 className="py-5 font-weight-bold  mt-5">No appointments yet!</h4>
         </section>
       )}
     </>

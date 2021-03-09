@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -8,6 +8,8 @@ import { userLogin } from '../../api';
 
 const SignIn = ({ history }) => {
   const dispatch = useDispatch();
+  const [error, setError] = useState('');
+  const [isLoaded, setIsLoaded] = useState(null);
   const user = useSelector(state => state.user);
 
   const userObj = {
@@ -20,12 +22,23 @@ const SignIn = ({ history }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(userLogin(userObj));
-    if (Object.keys(user).length > 0) {
-      handleSignIn();
-      e.target.reset();
-    }
+    await dispatch(userLogin(userObj))
+      .then(() => {
+        if (Object.keys(user).length > 0) {
+          setIsLoaded(true);
+          handleSignIn();
+          e.target.reset();
+          setError('');
+        } else {
+          setError('Invalid email or password');
+          e.target.reset();
+        }
+      });
   };
+
+  useEffect(() => () => {
+    setIsLoaded(false);
+  }, [isLoaded]);
 
   const handleChange = e => {
     userObj.sign_in = Object.assign(userObj.sign_in, {
@@ -33,13 +46,14 @@ const SignIn = ({ history }) => {
     });
   };
   return (
-    <section className="container">
+    <section className={styles.container}>
       <div className={styles.homeLink}>
         <Link to="/">Home</Link>
       </div>
       <div className={`${styles.formContainer} text-center`}>
         <form data-testid="form" onSubmit={handleSubmit}>
           <h3 data-testid="title" className="text-center">Sign In</h3>
+          <h6 className="text-danger">{error}</h6>
           <div className="form-group">
             <label htmlFor="email">
               Email

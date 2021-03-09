@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,6 @@ import { signOut } from '../../api';
 
 const Sidebar = ({ history }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
 
   const handleHomepage = () => {
     history.push('/');
@@ -24,15 +23,10 @@ const Sidebar = ({ history }) => {
   return (
     <>
       <button type="button" className={styles.toggler} onClick={sideBarToggle}>
-        <img src="https://img.icons8.com/ios-filled/50/000000/menu--v1.png" alt="menu-icon" />
+        <img src="https://img.icons8.com/ios-filled/24/000000/menu--v1.png" alt="menu-icon" />
       </button>
       <section className={`${styles.sidebar} sidebar`}>
-        <div className={`${styles.header} d-flex justify-content-start align-items-center`}>
-          <img className={styles.userlogo} src="https://img.icons8.com/carbon-copy/24/000000/user-male-circle.png" alt="user" />
-          {user.username}
-        </div>
-        {' '}
-        <h3 className="pl-3 font-weight-bold">BookIT</h3>
+        <h3 className="pl-3 font-weight-bold pb-5 mb-5">BookIT</h3>
         <NavLink activeClassName={styles.active} to="/doctors">DOCTORS</NavLink>
         <NavLink activeClassName={styles.active} to="/appointments">APPOINTMENTS</NavLink>
         <div className={styles.footer}>

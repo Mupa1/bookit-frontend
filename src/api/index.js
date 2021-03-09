@@ -109,3 +109,17 @@ export const fetchAppointments = () => async dispatch => {
       dispatch(action.getAppointments(data.data.appointment));
     });
 };
+
+export const deleteAppointments = id => async dispatch => {
+  await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments/${id}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  }).then(() => {
+    dispatch(action.destroyAppointments(id));
+  });
+};
