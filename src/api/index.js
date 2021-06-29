@@ -1,7 +1,9 @@
 import * as action from '../Redux/actions';
 
+const baseUrl = 'https://bookit-doc-appointments-api.herokuapp.com/api/v1';
+
 export const userRegistration = userObj => async dispatch => {
-  await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/sign_up', {
+  await fetch(`${baseUrl}/sign_up`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -18,7 +20,7 @@ export const userRegistration = userObj => async dispatch => {
 };
 
 export const userLogin = userObj => async dispatch => {
-  await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/sign_in', {
+  await fetch(`${baseUrl}/sign_in`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -35,7 +37,7 @@ export const userLogin = userObj => async dispatch => {
 };
 
 export const signOut = () => async dispatch => {
-  await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/log_out', {
+  await fetch(`${baseUrl}/log_out`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
@@ -51,7 +53,7 @@ export const signOut = () => async dispatch => {
 };
 
 export const fetchAllDoctors = () => async dispatch => {
-  await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors', {
+  await fetch(`${baseUrl}/doctors`, {
     mode: 'cors',
     headers: {
       Accept: 'application/json',
@@ -65,7 +67,7 @@ export const fetchAllDoctors = () => async dispatch => {
 };
 
 export const fetchADoctor = async (id, setDoctor) => {
-  await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/doctors/${id}`, {
+  await fetch(`${baseUrl}/doctors/${id}`, {
     mode: 'cors',
     headers: {
       Accept: 'application/json',
@@ -80,7 +82,7 @@ export const fetchADoctor = async (id, setDoctor) => {
 };
 
 export const bookAppointment = data => async dispatch => {
-  await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
+  await fetch(`${baseUrl}/appointments`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -97,7 +99,7 @@ export const bookAppointment = data => async dispatch => {
 };
 
 export const fetchAppointments = () => async dispatch => {
-  await fetch('https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments', {
+  await fetch(`${baseUrl}/appointments`, {
     mode: 'cors',
     headers: {
       Accept: 'application/json',
@@ -111,7 +113,7 @@ export const fetchAppointments = () => async dispatch => {
 };
 
 export const deleteAppointments = id => async dispatch => {
-  await fetch(`https://bookit-doc-appointments-api.herokuapp.com/api/v1/appointments/${id}`, {
+  await fetch(`${baseUrl}/appointments/${id}`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
